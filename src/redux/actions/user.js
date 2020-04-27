@@ -2,7 +2,7 @@ import Axios from 'axios'
 import { API_URL } from "../API"
 import userTypes from "../types/user"
 
-const { ON_LOGIN_FAIL, ON_LOGIN_SUCCESS, ON_LOGOUT } = userTypes
+const { ON_LOGIN_FAIL, ON_LOGIN_SUCCESS, ON_LOGOUT, ON_REGISTER_SUCCESS } = userTypes
 
 export const userInputHandler = (text) => {
     return {
@@ -57,7 +57,7 @@ export const registerHandler = (userData) => {
                         })
                             .then(res => {
                                 dispatch({
-                                    type: ON_LOGIN_SUCCESS,
+                                    type: ON_REGISTER_SUCCESS,
                                     payload: res.data
                                 })
                             })

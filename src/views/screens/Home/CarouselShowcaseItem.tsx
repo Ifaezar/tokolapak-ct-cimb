@@ -40,6 +40,7 @@ const CarouselShowcaseItem = ({
               </p>
               <ButtonUI
                 type="outlined"
+                onClick=''
                 className="mt-5"
                 style={{
                   backgroundColor: "#CCEAD7",
