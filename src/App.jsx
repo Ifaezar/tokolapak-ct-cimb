@@ -8,6 +8,7 @@ import Home from "./views/screens/Home/Home";
 import Navbar from "./views/components/Navbar/Navbar";
 import Authscreen from "./views/screens/auth/Authscreen"
 
+
   class App extends React.Component {
     render() {
       return (

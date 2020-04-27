@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { API_URL } from "../../API"
+import { API_URL } from "../API"
 import userTypes from "../types/user"
 
 const { ON_LOGIN_FAIL, ON_LOGIN_SUCCESS, ON_LOGOUT } = userTypes
@@ -41,7 +41,7 @@ export const loginHandler = (userData) => {
 
 export const registerHandler = (userData) => {
     return (dispatch) => {
-        const { username, password, role, fullName, passRepeat } = userData
+        const { username, password, email, passRepeat } = userData
         Axios.get(`${API_URL}/user`, {
             params: {
                 username
@@ -53,8 +53,7 @@ export const registerHandler = (userData) => {
                         Axios.post(`${API_URL}/user`, {
                             username: `${username}`,
                             password: `${password}`,
-                            fullName: `${fullName}`,
-                            role: `${role}`,
+                            email: `${email}`,
                         })
                             .then(res => {
                                 dispatch({

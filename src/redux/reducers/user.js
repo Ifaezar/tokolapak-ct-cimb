@@ -7,19 +7,19 @@ const init_state = {
   username: "",
   fullname: "",
   addres: {},
-  role: "",
+  email: "",
   errMsg: ''
 };
 
 export default (state = init_state, action) => {
   switch (action.type) {
     case ON_LOGIN_SUCCESS:
-      const { username, fullName, role, id } = action.payload;
+      const { username, fullName, email, id } = action.payload;
       return {
         ...state,
         username,
         fullName,
-        role,
+        email,
         id,
       };
     case ON_LOGIN_FAIL:
