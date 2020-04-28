@@ -5,6 +5,7 @@ const { ON_LOGIN_FAIL, ON_LOGIN_SUCCESS, ON_LOGOUT, ON_REGISTER_SUCCESS } = user
 const init_state = {
   id: 0,
   username: "",
+  name:'',
   password: "",
   email: "",
   errMsg: ''
@@ -13,12 +14,13 @@ const init_state = {
 export default (state = init_state, action) => {
   switch (action.type) {
     case ON_LOGIN_SUCCESS:
-      const { username, email, id } = action.payload;
+      const { username, email, id, name } = action.payload;
       return {
         ...state,
         username,
         email,
         id,
+        name,
         errMsg: ''
       };
     case ON_LOGIN_FAIL:
@@ -29,6 +31,7 @@ export default (state = init_state, action) => {
         username,
         email,
         id,
+        name,
         errMsg: ''
       };
     case ON_LOGOUT:

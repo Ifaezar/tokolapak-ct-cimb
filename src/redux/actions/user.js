@@ -21,6 +21,7 @@ export const loginHandler = (userData) => {
             }
         })
             .then(res => {
+                console.log(res.data)
                 if (res.data.length > 0) {
                     dispatch({
                         type: ON_LOGIN_SUCCESS,
@@ -41,7 +42,7 @@ export const loginHandler = (userData) => {
 
 export const registerHandler = (userData) => {
     return (dispatch) => {
-        const { username, password, email, passRepeat } = userData
+        const { username, password, email, passRepeat, name } = userData
         Axios.get(`${API_URL}/user`, {
             params: {
                 username
@@ -52,6 +53,7 @@ export const registerHandler = (userData) => {
                     if (password == passRepeat) {
                         Axios.post(`${API_URL}/user`, {
                             username: `${username}`,
+                            name: `${name}`,
                             password: `${password}`,
                             email: `${email}`,
                         })

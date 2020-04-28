@@ -1,20 +1,48 @@
 import React from 'react'
 import TextField from '../../components/TextField/TextField'
+import './Authscreen.css'
 import ButtonUI from '../../components/Button/Button'
 import { connect } from 'react-redux'
+import { Redirect } from "react-router-dom";
+import Cookie from 'universal-cookie'
 import { registerHandler, loginHandler } from '../../../redux/actions'
+
+
+
 
 class Authscreen extends React.Component {
     state = {
         isLogin: false,
-        username: '',
-        password: '',
-        email: '',
-        passRepeat: ''
+        registerForm: {
+            username: '',
+            name: '',
+            password: '',
+            email: '',
+            passRepeat: '',
+            showPassword: false
+        },
+        loginForm: {
+            username: '',
+            password: '',
+            showPassword: false
+        }
     }
 
-    inputHandler = (event, field) => {
-        this.setState({ [field]: event.target.value })
+    componentDidUpdate() {
+        if (this.props.user.id) {
+            const cookie = new Cookie()
+            cookie.set("authData", JSON.stringify(this.props.user))
+        }
+    }
+
+    inputHandler = (e, field, form) => {
+        const { value } = e.target
+        this.setState({
+            [form]: {
+                ...this.state[form],
+                [field]: value
+            }
+        })
     }
 
     registerMenu = () => {
@@ -22,23 +50,25 @@ class Authscreen extends React.Component {
     }
 
     registerKlik = () => {
-        const { username, email, password, passRepeat } = this.state
+        const { username, email, password, passRepeat, name } = this.state.registerForm
         const userData = {
             username,
             email,
             password,
+            name,
             passRepeat
         }
         this.props.onRegis(userData)
         this.setState({ username: "" })
         this.setState({ email: "" })
         this.setState({ password: "" })
+        this.setState({ name: "" })
         this.setState({ passRepeat: "" })
 
     }
 
-    loginKlik = () =>{
-        const { username, password } = this.state
+    loginKlik = () => {
+        const { username, password } = this.state.loginForm
         const userData = {
             username,
             password
@@ -52,14 +82,32 @@ class Authscreen extends React.Component {
         this.setState({ isLogin: true })
     }
 
+    checkBoxHandler = (e, form) => {
+        const { checked } = e.target
+        this.setState({
+            [form]: {
+                ...this.state[form],
+                showPassword: checked
+            }
+        })
+    }
+
     render() {
-        const { isLogin, username, password, passRepeat, email } = this.state
-        
+        const { isLogin, loginForm, registerForm } = this.state
+        if (this.props.user.id > 0) {
+            return <Redirect to="/" />;
+        }
         return (
             <div className="container">
-                <div className="row">
-                    <ButtonUI type="outlined" className="mt-4 mr-3" onClick={this.registerMenu}>Register </ButtonUI>
-                    <ButtonUI type="outlined" className="mt-4" onClick={this.loginMenu}>Login </ButtonUI>
+                <div className="d-flex flex-row">
+                    <ButtonUI type="outlined"
+                        className={`auth-screen-btn ${this.state.isLogin == false ? "active" : null} mt-4 mr-3`}
+                        onClick={this.registerMenu}>Register
+                    </ButtonUI>
+                    <ButtonUI type="outlined"
+                        className={`auth-screen-btn ${this.state.isLogin == true ? "active" : null} mt-4`}
+                        onClick={this.loginMenu}>Login
+                    </ButtonUI>
                 </div>
                 <div className="row mt-5">
                     <div className="col-5">
@@ -70,25 +118,27 @@ class Authscreen extends React.Component {
                                     <p className="mt-4">Welcome back {this.props.user.username},
                                 <br />please, login to your account
                                 </p>
-                                <h1>{this.props.user.errMsg}</h1>
+                                    <h1>{this.props.user.errMsg}</h1>
                                     <TextField
-                                        onChange={(event) => { this.inputHandler(event, "username") }}
+                                        onChange={(event) => { this.inputHandler(event, "username", "loginForm") }}
                                         placeholder="Username"
                                         className="mt-5"
-                                        value={username}
+                                        value={loginForm.username}
                                     />
                                     <TextField
                                         placeholder="Password"
                                         className="mt-2"
-                                        onChange={(event) => { this.inputHandler(event, "password") }}
-                                        value={password}
+                                        onChange={(event) => { this.inputHandler(event, "password", "loginForm") }}
+                                        value={loginForm.password}
                                     />
+
                                     <div className="d-flex justify-content-center">
-                                        <ButtonUI 
-                                        type="contained" 
-                                        className="mt-4"
-                                        onClick={this.loginKlik}>Login </ButtonUI>
+                                        <ButtonUI
+                                            type="contained"
+                                            className="mt-4"
+                                            onClick={this.loginKlik}>Login </ButtonUI>
                                     </div>
+
                                 </div>
                             ) : <div>
                                     <h3>Register</h3>
@@ -97,29 +147,36 @@ class Authscreen extends React.Component {
                                     </p>
                                     <h1>{this.props.user.errMsg}</h1>
                                     <TextField
-                                        placeholder="Name"
+                                        placeholder="Username"
                                         className="mt-5"
-                                        onChange={(event) => { this.inputHandler(event, "username") }}
-                                        value={username}
+                                        onChange={(event) => { this.inputHandler(event, "username", "registerForm") }}
+                                        value={registerForm.username}
+                                    />
+                                    <TextField
+                                        placeholder="Name"
+                                        className="mt-2"
+                                        onChange={(event) => { this.inputHandler(event, "name", "registerForm") }}
+                                        value={registerForm.name}
                                     />
                                     <TextField
                                         placeholder="Email"
                                         className="mt-2"
-                                        onChange={(event) => { this.inputHandler(event, "email") }}
-                                        value={email}
+                                        onChange={(event) => { this.inputHandler(event, "email", "registerForm") }}
+                                        value={registerForm.email}
                                     />
                                     <TextField
                                         placeholder="Password"
                                         className="mt-2"
-                                        onChange={(event) => { this.inputHandler(event, "password") }}
-                                        value={password}
+                                        onChange={(event) => { this.inputHandler(event, "password", "registerForm") }}
+                                        value={registerForm.password}
+                                        type={this.state.registerForm.showPassword ? "text" : "password"}
                                     />
-                                    <TextField
-                                        placeholder="Confirm Password"
-                                        className="mt-2"
-                                        onChange={(event) => { this.inputHandler(event, "passRepeat") }}
-                                        value={passRepeat}
-                                    />
+                                    <input
+                                        type='checkbox'
+                                        className="mt-3" name="showPasswordRegister"
+                                        onChange={(event) => { this.checkBoxHandler(event, "registerForm") }}
+                                        value="show password" ></input>
+                                    Show Password
                                     <div className="d-flex justify-content-center">
                                         <ButtonUI
                                             type="contained"
@@ -133,6 +190,7 @@ class Authscreen extends React.Component {
                 </div>
             </div>
         )
+
     }
 }
 

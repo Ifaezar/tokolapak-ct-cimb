@@ -6,7 +6,8 @@ type TextFieldProps = {
   className: string;
   placeholder: string;
   onChange: any;
-  value: any
+  value: any;
+  type: string
 };
 
 class TextField extends React.Component<TextFieldProps> {
@@ -28,7 +29,7 @@ class TextField extends React.Component<TextFieldProps> {
       <input
         onChange={this.props.onChange}
         placeholder={this.props.placeholder}
-        type="text"
+        type={this.props.type}
         value= {this.props.value}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
