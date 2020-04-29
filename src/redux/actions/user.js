@@ -50,25 +50,18 @@ export const registerHandler = (userData) => {
         })
             .then(res => {
                 if (res.data.length == 0) {
-                    if (password == passRepeat) {
-                        Axios.post(`${API_URL}/users`, {
-                            username: `${username}`,
-                            name: `${name}`,
-                            password: `${password}`,
-                            email: `${email}`,
-                        })
-                            .then(res => {
-                                dispatch({
-                                    type: ON_REGISTER_SUCCESS,
-                                    payload: res.data
-                                })
+                    Axios.post(`${API_URL}/users`, {
+                        username: `${username}`,
+                        name: `${name}`,
+                        password: `${password}`,
+                        email: `${email}`,
+                    })
+                        .then(res => {
+                            dispatch({
+                                type: ON_REGISTER_SUCCESS,
+                                payload: res.dat,
                             })
-                    } else {
-                        dispatch({
-                            type: ON_LOGIN_FAIL,
-                            payload: "Mohon maaf password salah"
                         })
-                    }
                 } else {
                     dispatch({
                         type: ON_LOGIN_FAIL,
@@ -117,6 +110,6 @@ export const logOutHandler = () => {
 
 export const cookieChecker = () => {
     return {
-      type: "COOKIE_CHECK",
+        type: "COOKIE_CHECK",
     };
-  };
+};

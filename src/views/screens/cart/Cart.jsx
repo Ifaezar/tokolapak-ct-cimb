@@ -11,11 +11,6 @@ import swal from 'sweetalert'
 class Cart extends React.Component {
     state = {
         listData: []
-        //     productName:'',
-        //     price:'',
-        //     category:'',
-        //     image:''
-        // }
     }
     componentDidMount() {
         this.getData()
@@ -70,22 +65,7 @@ class Cart extends React.Component {
             )
         })
         
-        // return this.state.listProduct.map(val => {
-        //     return (
-        //         <>
-        //             <tbody>
-        //                 <tr>
-        //                     <td>{val.productName}</td>
-        //                     <td>{val.price}</td>
-        //                     <td>{val.category}</td>
-        //                     <td><img src={val.image} alt="" style={{width:"100%", height:"100px"}}/></td>
-        //                     <td><ButtonUI >Delete</ButtonUI></td>
-        //                 </tr>
-        //             </tbody>
-
-        //         </>
-        //     )
-        // })
+       
     }
 
     render() {

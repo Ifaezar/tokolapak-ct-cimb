@@ -72,6 +72,27 @@
       "password": "asd",
       "email": "asd",
       "id": 12
+    },
+    {
+      "username": "i",
+      "name": "i",
+      "password": "i",
+      "email": "i",
+      "id": 13
+    },
+    {
+      "username": "9",
+      "name": "9",
+      "password": "9",
+      "email": "9",
+      "id": 14
+    },
+    {
+      "username": "p",
+      "name": "p",
+      "password": "p",
+      "email": "p",
+      "id": 15
     }
   ],
   "products": [
@@ -115,15 +136,9 @@
     },
     {
       "userId": 2,
-      "productId": 2,
+      "productId": 1,
       "quantity": 1,
-      "id": 20
-    },
-    {
-      "userId": 2,
-      "productId": 2,
-      "quantity": 1,
-      "id": 21
+      "id": 7
     }
   ]
 }

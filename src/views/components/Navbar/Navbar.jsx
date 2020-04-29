@@ -25,6 +25,7 @@ class Navbar extends React.Component {
     cookieObject.remove("authData")
     this.props.logOutHandler()
   }
+ 
   onFocus = () => {
     this.setState({ searchBarIsFocused: true });
   };
@@ -66,8 +67,10 @@ class Navbar extends React.Component {
                 <CircleBg>
                   <small style={{ color: "#3C64B1", fontWeight: "bold" }}>4</small>
                 </CircleBg>
-                <ButtonUI type="contained" onClick={this.logOut}>
-                  Log out
+                <ButtonUI type="contained" onClick={this.logOut} style={{color:"blue"}}>
+                <Link style={{color:"white"}} to="/auth">
+                    Log Out
+            </Link>
             </ButtonUI>
               </>
             ) :
