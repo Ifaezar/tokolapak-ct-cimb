@@ -3,10 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons/";
 import { connect } from 'react-redux'
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-
+import Cookie from 'universal-cookie'
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import ButtonUI from "../Button/Button.tsx";
+import { logOutHandler } from "../../../redux/actions"
+
+const cookieObject = new Cookie();
 
 const CircleBg = ({ children }) => {
   return <div className="circle-bg">{children}</div>;
@@ -18,6 +21,10 @@ class Navbar extends React.Component {
     searcBarInput: "",
   };
 
+  logOut = () => {
+    cookieObject.remove("authData")
+    this.props.logOutHandler()
+  }
   onFocus = () => {
     this.setState({ searchBarIsFocused: true });
   };
@@ -59,6 +66,9 @@ class Navbar extends React.Component {
                 <CircleBg>
                   <small style={{ color: "#3C64B1", fontWeight: "bold" }}>4</small>
                 </CircleBg>
+                <ButtonUI type="contained" onClick={this.logOut}>
+                  Log out
+            </ButtonUI>
               </>
             ) :
               <>
@@ -74,6 +84,7 @@ class Navbar extends React.Component {
                   >
                     Sign up
             </Link></ButtonUI>
+
               </>
           }
 
@@ -88,7 +99,9 @@ const mapsStateToProps = (state) => {
   return {
     user: state.user
   }
-
+}
+const mapsDispatchToProps = {
+  logOutHandler
 }
 
-export default connect(mapsStateToProps)(Navbar);
+export default connect(mapsStateToProps, mapsDispatchToProps)(Navbar);

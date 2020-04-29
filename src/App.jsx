@@ -9,8 +9,9 @@ import { connect } from 'react-redux'
 import Home from "./views/screens/Home/Home";
 import Navbar from "./views/components/Navbar/Navbar";
 import Authscreen from "./views/screens/auth/Authscreen"
-import { userKeepLogin } from "./redux/actions"
+import { userKeepLogin,cookieChecker } from "./redux/actions"
 import ProductDetail from "./views/screens/ProductDetail/ProductDetail";
+import Cart from './views/screens/cart/Cart'
 
 
 const cookieObject = new Cookie()
@@ -20,20 +21,29 @@ class App extends React.Component {
     let cookieResult = cookieObject.get("authData")
     if (cookieResult) {
       this.props.userKeepLogin(cookieResult)
+    }else {
+      this.props.cookieChecker();
     }
   }
+  
   render() {
-    return (
-      <>
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/auth" component={Authscreen} />
-          <Route exact path="/product/:id" component={ProductDetail} />
-        </Switch>
-        <div style={{ height: "120px" }} />
-      </>
-    );
+    if(this.props.user.cookieCheck){
+      return (
+        <>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/auth" component={Authscreen} />
+            <Route exact path="/product/:id" component={ProductDetail} />
+            <Route exact path="/cart" component={Cart} />
+          </Switch>
+          <div style={{ height: "120px" }} />
+        </>
+      );
+    }
+    else{
+      return <div>Loading.....</div>
+    }
   }
 }
 const mapsStateToProps = (state) => {
@@ -42,6 +52,7 @@ const mapsStateToProps = (state) => {
   }
 }
 const mapsDispatchToProps = {
-  userKeepLogin
+  userKeepLogin,
+  cookieChecker
 }
 export default connect(mapsStateToProps,mapsDispatchToProps)(withRouter(App));

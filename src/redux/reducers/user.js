@@ -5,10 +5,11 @@ const { ON_LOGIN_FAIL, ON_LOGIN_SUCCESS, ON_LOGOUT, ON_REGISTER_SUCCESS } = user
 const init_state = {
   id: 0,
   username: "",
-  name:'',
+  name: '',
   password: "",
   email: "",
-  errMsg: ''
+  errMsg: '',
+  cookieCheck: false
 };
 
 export default (state = init_state, action) => {
@@ -21,10 +22,11 @@ export default (state = init_state, action) => {
         email,
         id,
         name,
-        errMsg: ''
+        errMsg: '',
+        cookieCheck: true
       };
     case ON_LOGIN_FAIL:
-      return { ...state, errMsg: action.payload }
+      return { ...state, errMsg: action.payload, cookieCheck: true }
     case ON_REGISTER_SUCCESS:
       return {
         ...state,
@@ -32,10 +34,13 @@ export default (state = init_state, action) => {
         email,
         id,
         name,
-        errMsg: ''
+        errMsg: '',
+        cookieCheck: true
       };
     case ON_LOGOUT:
-      return { ...init_state }
+      return { ...init_state,  cookieCheck: true };
+    case "COOKIE_CHECK":
+      return { ...state,  cookieCheck: true };
     default:
       return { ...state }
   }
