@@ -14,7 +14,7 @@ export const userInputHandler = (text) => {
 export const loginHandler = (userData) => {
     return (dispatch) => {
         const { username, password } = userData
-        Axios.get(`${API_URL}/user`, {
+        Axios.get(`${API_URL}/users`, {
             params: {
                 username,
                 password
@@ -43,7 +43,7 @@ export const loginHandler = (userData) => {
 export const registerHandler = (userData) => {
     return (dispatch) => {
         const { username, password, email, passRepeat, name } = userData
-        Axios.get(`${API_URL}/user`, {
+        Axios.get(`${API_URL}/users`, {
             params: {
                 username
             }
@@ -51,7 +51,7 @@ export const registerHandler = (userData) => {
             .then(res => {
                 if (res.data.length == 0) {
                     if (password == passRepeat) {
-                        Axios.post(`${API_URL}/user`, {
+                        Axios.post(`${API_URL}/users`, {
                             username: `${username}`,
                             name: `${name}`,
                             password: `${password}`,
@@ -84,7 +84,7 @@ export const registerHandler = (userData) => {
 
 export const userKeepLogin = (userData) => {
     return (dispatch) => {
-        Axios.get(`${API_URL}/user`, {
+        Axios.get(`${API_URL}/users`, {
             params: {
                 id: userData.id
             }
