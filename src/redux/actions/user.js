@@ -50,16 +50,11 @@ export const registerHandler = (userData) => {
         })
             .then(res => {
                 if (res.data.length == 0) {
-                    Axios.post(`${API_URL}/users`, {
-                        username: `${username}`,
-                        name: `${name}`,
-                        password: `${password}`,
-                        email: `${email}`,
-                    })
+                    Axios.post(`${API_URL}/users`, { ...userData, role: "user" })
                         .then(res => {
                             dispatch({
                                 type: ON_REGISTER_SUCCESS,
-                                payload: res.dat,
+                                payload: res.data
                             })
                         })
                 } else {
@@ -113,3 +108,10 @@ export const cookieChecker = () => {
         type: "COOKIE_CHECK",
     };
 };
+
+export const searchProduct = (search) => {
+    return {
+        type: "SEACRH_FILTER",
+        payload: search
+    };
+}

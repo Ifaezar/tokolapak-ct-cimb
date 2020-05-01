@@ -7,6 +7,7 @@ import {
   faMoneyBillWave,
   faHeadset,
 } from "@fortawesome/free-solid-svg-icons";
+import { connect } from 'react-redux'
 import Axios from 'axios'
 import "./Home.css";
 
@@ -20,6 +21,7 @@ import ButtonUI from "../../components/Button/Button";
 import CarouselShowcaseItem from "./CarouselShowcaseItem.tsx";
 import Colors from "../../../constants/Colors";
 import { API_URL } from "../../../redux/API";
+import { searchProduct } from "../../../redux/actions";
 
 const dummy = [
   {
@@ -112,9 +114,14 @@ class Home extends React.Component {
     this.setState({ activeIndex: prevIndex });
   };
 
-  getBestSellerData = () => {
-    Axios.get(`${API_URL}/products`)
+  getBestSellerData = (filterCategory) => {
+    Axios.get(`${API_URL}/products`, {
+      params: {
+        category: filterCategory,
+      }
+    })
       .then(res => {
+        console.log(res.data)
         this.setState({ bestSellerData: res.data })
       })
       .catch(err => {
@@ -122,9 +129,12 @@ class Home extends React.Component {
       })
   }
 
+
   renderProducts = () => {
     return this.state.bestSellerData.map(val => {
-      return <ProductCard key={`bestseller-${val.id}`} data={val} className="m-2" />
+      if(val.productName.toLowerCase().startsWith(this.props.user.searchBar.toLowerCase())){
+        return <ProductCard key={`bestseller-${val.id}`} data={val} className="m-2" />
+      }
     })
   }
 
@@ -135,16 +145,29 @@ class Home extends React.Component {
     return (
       <div>
         <div className="d-flex justify-content-center flex-row align-items-center my-3">
-          <Link to="/" style={{ color: "inherit" }}>
+          <Link
+            to="/"
+            style={{ color: "inherit" }}
+            onClick={() => this.getBestSellerData("Phone")}
+          >
             <h6 className="mx-4 font-weight-bold">PHONE</h6>
           </Link>
-          <Link to="/" style={{ color: "inherit" }}>
+          <Link to="/"
+            style={{ color: "inherit" }}
+            onClick={() => this.getBestSellerData("Laptop")}
+          >
             <h6 className="mx-4 font-weight-bold">LAPTOP</h6>
           </Link>
-          <Link to="/" style={{ color: "inherit" }}>
-            <h6 className="mx-4 font-weight-bold">TAB</h6>
+          <Link 
+          to="/" 
+          style={{ color: "inherit" }}
+          onClick={() => this.getBestSellerData("Tablet")}>
+            <h6 className="mx-4 font-weight-bold">TABLET</h6>
           </Link>
-          <Link to="/" style={{ color: "inherit" }}>
+          <Link 
+          to="/" 
+          style={{ color: "inherit" }}
+          onClick={() => this.getBestSellerData("Desktop")}>
             <h6 className="mx-4 font-weight-bold">DESKTOP</h6>
           </Link>
         </div>
@@ -227,4 +250,10 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapsStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapsStateToProps)(Home);

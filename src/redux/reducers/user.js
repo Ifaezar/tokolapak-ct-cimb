@@ -7,6 +7,8 @@ const init_state = {
   username: "",
   name: '',
   password: "",
+  role: "",
+  searchBar: '',
   email: "",
   errMsg: '',
   cookieCheck: false
@@ -15,13 +17,14 @@ const init_state = {
 export default (state = init_state, action) => {
   switch (action.type) {
     case ON_LOGIN_SUCCESS:
-      const { username, email, id, name } = action.payload;
+      const { username, email, id, name, role, searchBar } = action.payload;
       return {
         ...state,
         username,
         email,
         id,
         name,
+        role,
         errMsg: '',
         cookieCheck: true
       };
@@ -33,14 +36,17 @@ export default (state = init_state, action) => {
         username,
         email,
         id,
+        role,
         name,
         errMsg: '',
         cookieCheck: true
       };
     case ON_LOGOUT:
-      return { ...init_state,  cookieCheck: true };
+      return { ...init_state, cookieCheck: true };
+    case "SEACRH_FILTER":
+      return { ...state, searchBar: action.payload };
     case "COOKIE_CHECK":
-      return { ...state,  cookieCheck: true };
+      return { ...state, cookieCheck: true };
     default:
       return { ...state }
   }

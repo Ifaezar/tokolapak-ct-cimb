@@ -18,7 +18,7 @@ class Authscreen extends React.Component {
             name: '',
             password: '',
             email: '',
-            passRepeat: '',
+            role: '',
             showPassword: false
         },
         loginForm: {
@@ -50,20 +50,20 @@ class Authscreen extends React.Component {
     }
 
     registerKlik = () => {
-        const { username, email, password, passRepeat, name } = this.state.registerForm
+        const { username, email, password, role, name } = this.state.registerForm
         const userData = {
             username,
             email,
             password,
             name,
-            passRepeat
+            role
         }
         this.props.onRegis(userData)
-        this.setState({ username: "" })
-        this.setState({ email: "" })
-        this.setState({ password: "" })
-        this.setState({ name: "" })
-        this.setState({ passRepeat: "" })
+        this.state.registerForm.username = ""
+        this.state.registerForm.email = ""
+        this.state.registerForm.password = ""
+        this.state.registerForm.name = ""
+        this.state.registerForm.role = ""
 
     }
 
@@ -74,8 +74,8 @@ class Authscreen extends React.Component {
             password
         }
         this.props.onLogin(userData)
-        this.setState({ username: "" })
-        this.setState({ password: "" })
+        this.state.loginForm.username = ""
+        this.state.loginForm.password = ""
     }
 
     loginMenu = () => {
