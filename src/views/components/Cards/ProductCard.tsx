@@ -28,48 +28,53 @@ class ProductCard extends React.Component<ProductCardProps> {
       image: '',
     }
   }
-  
+
   render() {
     const { id, productName, price, review, image } = this.props.data;
 
     return (
-      <div className={`product-card d-inline-block ${this.props.className}`}>
-        <img
-          src={image}
-          alt={this.props.data.productName}
-          style={{ width: "224px", height: "250px", objectFit: "contain" }}
-        />
-        <div>
-          <p className="mt-3">{productName}</p>
-          <h5 style={{ fontWeight: "bolder" }}>
-            {new Intl.NumberFormat("id-ID", {
-              style: "currency",
-              currency: "IDR",
-            }).format(price)}
-          </h5>
-          <p className="small">Jakarta Selatan</p>
-        </div>
-        <div className="d-flex flex-row align-items-center justify-content-between mt-2">
+      <Link to={`/product/${id}`}
+        style={{ textDecoration: "none", color:"black" }}>
+        <div className={`product-card d-inline-block ${this.props.className}`}>
+
+
+          <img
+            src={image}
+            alt={this.props.data.productName}
+            style={{ width: "224px", height: "250px", objectFit: "contain" }}
+          />
           <div>
-            <div className="d-flex flex-row align-items-center justify-content-between">
-              {/* Render stars dynamically */}
-              <FontAwesomeIcon style={{ fontSize: "10px" }} icon={faStar} />
-              <FontAwesomeIcon style={{ fontSize: "10px" }} icon={faStar} />
-              <FontAwesomeIcon style={{ fontSize: "10px" }} icon={faStar} />
-              <FontAwesomeIcon style={{ fontSize: "10px" }} icon={faStar} />
-              <FontAwesomeIcon style={{ fontSize: "10px" }} icon={faStar} />
-              <small className="ml-2">4.5</small>
-            </div>
+            <p className="mt-3">{productName}</p>
+            <h5 style={{ fontWeight: "bolder" }}>
+              {new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR",
+              }).format(price)}
+            </h5>
+            <p className="small">Jakarta Selatan</p>
           </div>
-          <ButtonUI
-            type="outlined"
-            style={{ fontSize: "12px", padding: "4px 8px" }}
-          >
-            {" "}
-            <FontAwesomeIcon icon={faHeart} /> Add to wishlist
+          <div className="d-flex flex-row align-items-center justify-content-between mt-2">
+            <div>
+              <div className="d-flex flex-row align-items-center justify-content-between">
+                {/* Render stars dynamically */}
+                <FontAwesomeIcon style={{ fontSize: "10px" }} icon={faStar} />
+                <FontAwesomeIcon style={{ fontSize: "10px" }} icon={faStar} />
+                <FontAwesomeIcon style={{ fontSize: "10px" }} icon={faStar} />
+                <FontAwesomeIcon style={{ fontSize: "10px" }} icon={faStar} />
+                <FontAwesomeIcon style={{ fontSize: "10px" }} icon={faStar} />
+                <small className="ml-2">4.5</small>
+              </div>
+            </div>
+            <ButtonUI
+              type="outlined"
+              style={{ fontSize: "12px", padding: "4px 8px" }}
+            >
+              {" "}
+              <FontAwesomeIcon icon={faHeart} /> Add to wishlist
           </ButtonUI>
+          </div>
         </div>
-      </div>
+      </Link>
     );
   }
 }

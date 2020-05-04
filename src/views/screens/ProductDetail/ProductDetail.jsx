@@ -45,7 +45,6 @@ class ProductDetail extends React.Component {
                 })
                 .then(res =>{
                     console.log(res.data)
-                
                     swal("Add to cart","your item has been added to cart", "success")
                 })  
                 .catch(err => {

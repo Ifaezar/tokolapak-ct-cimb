@@ -31,7 +31,7 @@ class Authscreen extends React.Component {
     componentDidUpdate() {
         if (this.props.user.id) {
             const cookie = new Cookie()
-            cookie.set("authData", JSON.stringify(this.props.user))
+            cookie.set("authData", JSON.stringify(this.props.user), { path: "/" })
         }
     }
 
@@ -130,7 +130,14 @@ class Authscreen extends React.Component {
                                         className="mt-2"
                                         onChange={(event) => { this.inputHandler(event, "password", "loginForm") }}
                                         value={loginForm.password}
+                                        type={this.state.loginForm.showPassword ? "text" : "password"}
                                     />
+                                    <input
+                                        type='checkbox'
+                                        className="mt-3" name="showPasswordLogin"
+                                        onChange={(event) => { this.checkBoxHandler(event, "loginForm") }}
+                                        value="show password" ></input>
+                                    Show Password
 
                                     <div className="d-flex justify-content-center">
                                         <ButtonUI

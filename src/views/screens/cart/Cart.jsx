@@ -13,6 +13,7 @@ import { copyFileSync } from 'fs';
 class Cart extends React.Component {
     state = {
         listData: [],
+        checOutItem: [],
         listItems: [],
         totalPrice: 0,
         isCheckOut: false
@@ -51,6 +52,18 @@ class Cart extends React.Component {
         this.tableProduct()
     }
 
+    checkboxHandler = (e, idx) => {
+        const { checked } = e.target
+        if (checked) {
+            this.setState({ checOutItem: [...this.state.checOutItem, idx] })
+        } else {
+            this.setState({
+                checOutItem: [
+                    ...this.state.checOutItem.filter(val => val !== idx)
+                ]
+            })
+        }
+    }
 
     tableProduct = () => {
         return this.state.listData.map((val, idx) => {
@@ -60,10 +73,21 @@ class Cart extends React.Component {
                         <tr>
                             <td>{idx + 1}</td>
                             <td>{val.product.productName}</td>
-                            <td>{val.product.price}</td>
+                            <td>
+                                {new Intl.NumberFormat("id-ID", {
+                                    style: "currency",
+                                    currency: "IDR",
+                                }).format(val.product.price)}
+                            </td>
                             <td>{val.product.category}</td>
                             <td>{val.quantity}</td>
                             <td><img src={val.product.image} alt="" style={{ width: "100", height: "200px", objectFit: 'contain' }} /></td>
+                            <td>
+                                <input
+                                    type="checkbox"
+                                    onChange={(e) => this.checkboxHandler(e, idx)}
+                                    className="form-control" />
+                            </td>
                             <td><ButtonUI onClick={() => this.deleteData(val.id)}>Delete</ButtonUI></td>
                         </tr>
                     </tbody>
@@ -114,9 +138,17 @@ class Cart extends React.Component {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{val.product.price}</td>
+                                        <td>{new Intl.NumberFormat("id-ID", {
+                                            style: "currency",
+                                            currency: "IDR",
+                                        }).format(val.product.price)}</td>
                                         <td>{val.quantity}</td>
-                                        <td>{val.quantity * val.product.price}</td>
+                                        <td>
+                                            {new Intl.NumberFormat("id-ID", {
+                                                style: "currency",
+                                                currency: "IDR",
+                                            }).format(val.quantity * val.product.price)}
+                                        </td>
                                     </tr>
                                 </tbody>
                             </>
@@ -129,7 +161,11 @@ class Cart extends React.Component {
                                 Total Price =
                             </td>
                             <td>
-                                {this.state.totalPrice}
+                                {new Intl.NumberFormat("id-ID", {
+                                    style: "currency",
+                                    currency: "IDR",
+                                }).format(this.state.totalPrice)}
+
                             </td>
                         </tr>
                     </tfoot>
@@ -149,11 +185,11 @@ class Cart extends React.Component {
             .then(res => {
                 console.log(res.data)
                 res.data.map((val) => {
-                    this.setState({ listItems: [...this.state.listItems, val.product] })
+                    // this.setState({ listItems: [...this.state.listItems, val.product] })
+                    console.log(res.data)
                     Axios.delete(`${API_URL}/cart/${val.id}`)
                         .then(res => {
                             console.log(res)
-                            
                         })
                         .catch(err => {
                             console.log(err)
@@ -163,10 +199,25 @@ class Cart extends React.Component {
                     userId: this.props.user.id,
                     totalPrice: this.state.totalPrice,
                     status: "pending",
-                    items: this.state.listItems,
+                    // items: this.state.listItems,
                 })
                     .then(res => {
-                        console.log(res.data)
+                        this.state.listData.map(val =>{
+                            Axios.post(`${API_URL}/transactionDetails`, {
+                                productId: val.product.id,
+                                price: val.product.price,
+                                totalPrice: val.product.price * val.quantity,
+                                quantity: val.quantity,
+                                transactionId : res.data.id
+                            })
+                            .then(res =>{
+                                console.log(res)
+                            })
+                            .catch(err =>{
+                                console.log(err)
+                            })
+                        })
+                        // console.log(res.data)
                         swal("Success!", "Silahkan ke menu payment untuk membayar", "success")
                         this.setState({ listData: '' })
                     })

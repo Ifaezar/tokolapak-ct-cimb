@@ -14,7 +14,9 @@ import {
 
 import { Link } from "react-router-dom";
 import ButtonUI from "../Button/Button.tsx";
-import { logOutHandler,searchProduct } from "../../../redux/actions"
+import { logOutHandler, searchProduct } from "../../../redux/actions"
+import Axios from "axios";
+import { API_URL } from "../../../redux/API";
 
 const cookieObject = new Cookie();
 
@@ -27,6 +29,7 @@ class Navbar extends React.Component {
     searchBarIsFocused: false,
     searcBarInput: "",
     dropdownOpen: false,
+    keranjang: 0
   };
 
   logOut = () => {
@@ -34,6 +37,9 @@ class Navbar extends React.Component {
     this.props.logOutHandler()
   }
 
+  componentDidMount() {
+    this.keranjangHandler()
+  }
   onFocus = () => {
     this.setState({ searchBarIsFocused: true });
   };
@@ -45,7 +51,22 @@ class Navbar extends React.Component {
   toggleDropdown = () => {
     this.setState({ dropdownOpen: !this.state.dropdownOpen });
   };
-  
+
+  keranjangHandler = () => {
+    Axios.get(`${API_URL}/cart`, {
+      params: {
+        userId: this.props.user.id
+      }
+    })
+      .then(res => {
+        console.log(res.data.length)
+        this.setState({ keranjang: res.data.length })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   render() {
     return (
       <div className="d-flex flex-row justify-content-between align-items-center py-4 navbar-container">
@@ -58,7 +79,7 @@ class Navbar extends React.Component {
           <input
             onFocus={this.onFocus}
             onBlur={this.onBlur}
-            onChange={(e)=>{this.props.onsearchProduct(e.target.value)}}
+            onChange={(e) => { this.props.onsearchProduct(e.target.value) }}
             className={`search-bar ${
               this.state.searchBarIsFocused ? "active" : null
               }`}
@@ -70,49 +91,65 @@ class Navbar extends React.Component {
           {
             this.props.user.id ? (
               <>
-               <Dropdown
-                toggle={this.toggleDropdown}
-                isOpen={this.state.dropdownOpen}
-              >
-                <DropdownToggle tag="div" className="d-flex">
-                  <FontAwesomeIcon icon={faUser} style={{ fontSize: 24 }} />
-                  <p className="small ml-3 mr-4">{this.props.user.username}</p>
-                </DropdownToggle>
-                <DropdownMenu className="mt-2">
-                  <DropdownItem>
-                    <Link
-                      style={{ color: "inherit", textDecoration: "none" }}
-                      to="/dashboard"
-                    >
-                      Dashboard
+                <Dropdown
+                  toggle={this.toggleDropdown}
+                  isOpen={this.state.dropdownOpen}
+                >
+                  <DropdownToggle tag="div" className="d-flex">
+                    <FontAwesomeIcon icon={faUser} style={{ fontSize: 24 }} />
+                    <p className="small ml-3 mr-4">{this.props.user.username}</p>
+                  </DropdownToggle>
+                  {
+                    this.props.user.role == "admin" ? (
+                      <DropdownMenu className="mt-2">
+                        <DropdownItem>
+                          <Link
+                            style={{ color: "inherit", textDecoration: "none" }}
+                            to="/admin/dashboard"
+                          >
+                            Dashboard
                     </Link>
-                  </DropdownItem>
-                  <DropdownItem>Members</DropdownItem>
-                  <DropdownItem>Payments</DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-              <Link
-                className="d-flex flex-row"
-                to="/cart"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
+                        </DropdownItem>
+                        <DropdownItem>Members</DropdownItem>
+                        <DropdownItem>Payments</DropdownItem>
+                      </DropdownMenu>
+                    ) : <DropdownMenu className="mt-2">
+                        <DropdownItem>
+                          <Link
+                            style={{ color: "inherit", textDecoration: "none" }}
+                            to="/admin/dashboard"
+                          >
+                            Wishlist
+                    </Link>
+                        </DropdownItem>
+                        <DropdownItem>History</DropdownItem>
+                        <DropdownItem>Payments</DropdownItem>
+                      </DropdownMenu>
+                  }
+                </Dropdown>
+                <Link
+                  className="d-flex flex-row"
+                  to="/cart"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
                   <FontAwesomeIcon
                     className="mr-2"
                     icon={faShoppingCart}
                     style={{ fontSize: 24 }}
                   />
                   <CircleBg>
-                    <small style={{ color: "#3C64B1", fontWeight: "bold" }}>4</small>
+                    <small style={{ color: "#3C64B1", fontWeight: "bold" }}>{this.state.keranjang}</small>
                   </CircleBg>
                 </Link>
-                <Link style={{ textDecoration: "none", color: "inherit" }}
-                  to="/auth">
-                  <ButtonUI
-                    type="contained"
-                    onClick={this.logOut}>
-                    Log Out
+
+                <ButtonUI
+                  type="contained"
+                  onClick={this.logOut}>
+                  <Link style={{ textDecoration: "none", color: "inherit" }}
+                    to="/"></Link>
+                  Log Out
                 </ButtonUI>
-                </Link>
+
               </>
             ) :
               <>

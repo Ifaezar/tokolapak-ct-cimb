@@ -19,7 +19,6 @@
       "email": "jj",
       "password": "jj",
       "name": "jj",
-      "passRepeat": "",
       "role": "user",
       "id": 3
     }
@@ -82,26 +81,29 @@
       "id": 7
     }
   ],
-  "cart": [],
-  "transaction": [
+  "cart": [
     {
       "userId": 1,
-      "totalPrice": "100000",
-      "status": "pending",
-      "items": [],
+      "productId": 4,
+      "quantity": 1,
       "id": 1
     },
     {
       "userId": 1,
-      "totalPrice": 55000000,
-      "status": "pending",
-      "items": [
-        null
-      ],
+      "productId": 2,
+      "quantity": 1,
       "id": 2
     },
     {
       "userId": 1,
+      "productId": 5,
+      "quantity": 1,
+      "id": 3
+    }
+  ],
+  "transaction": [
+    {
+      "userId": 1,
       "totalPrice": 55000000,
       "status": "pending",
       "items": [
@@ -122,207 +124,50 @@
           "id": 1
         }
       ],
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "totalPrice": 640000000,
+      "status": "pending",
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "totalPrice": 40000000,
+      "status": "pending",
+      "id": 3
+    }
+  ],
+  "transactionDetails": [
+    {
+      "productId": 4,
+      "price": "200000000",
+      "totalPrice": 600000000,
+      "quantity": 3,
+      "id": 1
+    },
+    {
+      "productId": 1,
+      "price": 5000000,
+      "totalPrice": 10000000,
+      "quantity": 2,
+      "id": 2
+    },
+    {
+      "productId": 2,
+      "price": 15000000,
+      "totalPrice": 30000000,
+      "quantity": 2,
       "id": 3
     },
     {
-      "userId": 1,
-      "totalPrice": 55000000,
-      "status": "pending",
-      "items": [
-        {
-          "productName": "iPad Pro 3",
-          "price": 15000000,
-          "category": "Tablet",
-          "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/ipad-pro-11-select-cell-spacegray-201810.png",
-          "desc": "HP Terbaikk loh",
-          "id": 2
-        },
-        {
-          "productName": "iPhone 7 Plus",
-          "price": 5000000,
-          "category": "Phone",
-          "image": "https://ibox.co.id/media/wysiwyg/PromoOnline/web-banner---iphone-7-plus-rev.png",
-          "desc": "HP Terbaikk loh",
-          "id": 1
-        }
-      ],
+      "productId": 3,
+      "price": 20000000,
+      "totalPrice": 40000000,
+      "quantity": 2,
+      "transactionId": 3,
       "id": 4
-    },
-    {
-      "userId": 1,
-      "totalPrice": 55000000,
-      "status": "pending",
-      "items": [
-        {
-          "productName": "iPad Pro 3",
-          "price": 15000000,
-          "category": "Tablet",
-          "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/ipad-pro-11-select-cell-spacegray-201810.png",
-          "desc": "HP Terbaikk loh",
-          "id": 2
-        },
-        {
-          "productName": "iPhone 7 Plus",
-          "price": 5000000,
-          "category": "Phone",
-          "image": "https://ibox.co.id/media/wysiwyg/PromoOnline/web-banner---iphone-7-plus-rev.png",
-          "desc": "HP Terbaikk loh",
-          "id": 1
-        }
-      ],
-      "id": 5
-    },
-    {
-      "userId": 1,
-      "totalPrice": 55000000,
-      "status": "pending",
-      "items": [
-        {
-          "productName": "iPad Pro 3",
-          "price": 15000000,
-          "category": "Tablet",
-          "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/ipad-pro-11-select-cell-spacegray-201810.png",
-          "desc": "HP Terbaikk loh",
-          "id": 2
-        },
-        {
-          "productName": "iPhone 7 Plus",
-          "price": 5000000,
-          "category": "Phone",
-          "image": "https://ibox.co.id/media/wysiwyg/PromoOnline/web-banner---iphone-7-plus-rev.png",
-          "desc": "HP Terbaikk loh",
-          "id": 1
-        }
-      ],
-      "id": 6
-    },
-    {
-      "userId": 1,
-      "totalPrice": 55000000,
-      "status": "pending",
-      "items": [
-        {
-          "productName": "iPad Pro 3",
-          "price": 15000000,
-          "category": "Tablet",
-          "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/ipad-pro-11-select-cell-spacegray-201810.png",
-          "desc": "HP Terbaikk loh",
-          "id": 2
-        },
-        {
-          "productName": "iPhone 7 Plus",
-          "price": 5000000,
-          "category": "Phone",
-          "image": "https://ibox.co.id/media/wysiwyg/PromoOnline/web-banner---iphone-7-plus-rev.png",
-          "desc": "HP Terbaikk loh",
-          "id": 1
-        }
-      ],
-      "id": 7
-    },
-    {
-      "userId": 1,
-      "totalPrice": 65000000,
-      "status": "pending",
-      "items": [
-        {
-          "productName": "iPad Pro 3",
-          "price": 15000000,
-          "category": "Tablet",
-          "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/ipad-pro-11-select-cell-spacegray-201810.png",
-          "desc": "HP Terbaikk loh",
-          "id": 2
-        },
-        {
-          "productName": "Macbook Pro",
-          "price": 20000000,
-          "category": "Laptop",
-          "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/m/b/mbp15touch-silver-select-cto-201807_3_1.jpeg",
-          "desc": "HP Terbaikk loh",
-          "id": 3
-        }
-      ],
-      "id": 8
-    },
-    {
-      "userId": 1,
-      "totalPrice": 65000000,
-      "status": "pending",
-      "items": [
-        {
-          "productName": "iPad Pro 3",
-          "price": 15000000,
-          "category": "Tablet",
-          "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/ipad-pro-11-select-cell-spacegray-201810.png",
-          "desc": "HP Terbaikk loh",
-          "id": 2
-        },
-        {
-          "productName": "Macbook Pro",
-          "price": 20000000,
-          "category": "Laptop",
-          "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/m/b/mbp15touch-silver-select-cto-201807_3_1.jpeg",
-          "desc": "HP Terbaikk loh",
-          "id": 3
-        }
-      ],
-      "id": 9
-    },
-    {
-      "userId": 1,
-      "totalPrice": 255000000,
-      "status": "pending",
-      "items": [
-        {
-          "productName": "iPhone 7 Plus",
-          "price": 5000000,
-          "category": "Phone",
-          "image": "https://ibox.co.id/media/wysiwyg/PromoOnline/web-banner---iphone-7-plus-rev.png",
-          "desc": "HP Terbaikk loh",
-          "id": 1
-        },
-        {
-          "productName": "iPad Pro 3",
-          "price": 15000000,
-          "category": "Tablet",
-          "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/ipad-pro-11-select-cell-spacegray-201810.png",
-          "desc": "HP Terbaikk loh",
-          "id": 2
-        },
-        {
-          "productName": "iPhone 11 promag",
-          "price": "200000000",
-          "category": "Phone",
-          "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/iphone-11-pro-max-midnight-green_3.png",
-          "desc": "hp mahal",
-          "id": 4
-        }
-      ],
-      "id": 10
-    },
-    {
-      "userId": 1,
-      "totalPrice": 12000000,
-      "status": "pending",
-      "items": [
-        {
-          "productName": "iPhone 7 Plus",
-          "price": 5000000,
-          "category": "Phone",
-          "image": "https://ibox.co.id/media/wysiwyg/PromoOnline/web-banner---iphone-7-plus-rev.png",
-          "desc": "HP Terbaikk loh",
-          "id": 1
-        },
-        {
-          "productName": "asd",
-          "price": "1000000",
-          "category": "Phone",
-          "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/iphone-11-pro-max-midnight-green_3.png",
-          "desc": "asdasd",
-          "id": 6
-        }
-      ],
-      "id": 11
     }
   ]
 }
