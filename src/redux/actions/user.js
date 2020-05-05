@@ -56,7 +56,7 @@ export const registerHandler = (userData) => {
                     Axios.post(`${API_URL}/users`, { ...userData, role: "user" })
                         .then(res => {
                             dispatch({
-                                type: ON_REGISTER_SUCCESS,
+                                type: ON_LOGIN_SUCCESS,
                                 payload: res.data
                             })
                         })

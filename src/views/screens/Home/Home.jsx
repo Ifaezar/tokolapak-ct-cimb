@@ -145,6 +145,13 @@ class Home extends React.Component {
     return (
       <div>
         <div className="d-flex justify-content-center flex-row align-items-center my-3">
+        <Link
+            to="/"
+            style={{ color: "inherit" }}
+            onClick={() => this.getBestSellerData()}
+          >
+            <h6 className="mx-4 font-weight-bold">ALL</h6>
+          </Link>
           <Link
             to="/"
             style={{ color: "inherit" }}

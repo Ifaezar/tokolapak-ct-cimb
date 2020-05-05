@@ -59,11 +59,7 @@ class Authscreen extends React.Component {
             role
         }
         this.props.onRegis(userData)
-        this.state.registerForm.username = ""
-        this.state.registerForm.email = ""
-        this.state.registerForm.password = ""
-        this.state.registerForm.name = ""
-        this.state.registerForm.role = ""
+       
 
     }
 
@@ -74,8 +70,6 @@ class Authscreen extends React.Component {
             password
         }
         this.props.onLogin(userData)
-        this.state.loginForm.username = ""
-        this.state.loginForm.password = ""
     }
 
     loginMenu = () => {

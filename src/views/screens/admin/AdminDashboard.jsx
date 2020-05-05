@@ -42,6 +42,18 @@ class AdminDashboard extends React.Component {
       });
   };
 
+  deleteBtnHandler = (id) => {
+    Axios.delete(`${API_URL}/products/${id}`)
+      .then(res => {
+        console.log(id)
+        swal("Delete Data", "Deleted", "success")
+        this.getProductList()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   renderProductList = () => {
     return this.state.productList.map((val, idx) => {
       const { id, productName, price, category, image, desc } = val;
@@ -75,7 +87,7 @@ class AdminDashboard extends React.Component {
           <tr
             className={`collapse-item ${
               this.state.activeProducts.includes(idx) ? "active" : null
-            }`}
+              }`}
           >
             <td className="" colSpan={3}>
               <div className="d-flex justify-content-around align-items-center">
@@ -110,7 +122,10 @@ class AdminDashboard extends React.Component {
                   >
                     Edit
                   </ButtonUI>
-                  <ButtonUI className="mt-3" type="textual">
+                  <ButtonUI
+                    className="mt-3"
+                    type="textual"
+                    onClick={(_) => this.deleteBtnHandler(id)}>
                     Delete
                   </ButtonUI>
                 </div>

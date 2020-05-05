@@ -5,22 +5,32 @@
       "password": "123",
       "email": "gmail",
       "role": "user",
-      "id": 1
+      "id": 1,
+      "name": "Ilham Faezar"
     },
     {
       "username": "admin",
       "password": "1",
       "email": "a",
       "role": "admin",
-      "id": 2
+      "id": 2,
+      "name": "Admin 1"
     },
     {
       "username": "jjj",
       "email": "jj",
       "password": "jj",
       "name": "jj",
-      "role": "user",
+      "role": "admin",
       "id": 3
+    },
+    {
+      "username": "faezar",
+      "email": "hhh",
+      "password": "1234",
+      "name": "ilham",
+      "role": "user",
+      "id": 4
     }
   ],
   "products": [
@@ -65,109 +75,193 @@
       "id": 5
     },
     {
-      "productName": "asd",
-      "price": "1000000",
+      "productName": "Sony Xperia 1",
+      "price": "10000000",
       "category": "Phone",
-      "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/iphone-11-pro-max-midnight-green_3.png",
-      "desc": "asdasd",
+      "image": "https://p.ipricegroup.com/4cf905402f4047389caca6ee04575eb0409ac2fd_0.jpg",
+      "desc": "HP terbaik Sony",
       "id": 6
-    },
-    {
-      "productName": "hhhh",
-      "price": "2000000000",
-      "category": "Phone",
-      "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/iphone-11-pro-max-midnight-green_3.png",
-      "desc": "hehe",
-      "id": 7
     }
   ],
-  "cart": [
-    {
-      "userId": 1,
-      "productId": 4,
-      "quantity": 1,
-      "id": 1
-    },
-    {
-      "userId": 1,
-      "productId": 2,
-      "quantity": 1,
-      "id": 2
-    },
-    {
-      "userId": 1,
-      "productId": 5,
-      "quantity": 1,
-      "id": 3
-    }
-  ],
+  "cart": [],
   "transaction": [
     {
       "userId": 1,
-      "totalPrice": 55000000,
-      "status": "pending",
-      "items": [
-        {
-          "productName": "iPad Pro 3",
-          "price": 15000000,
-          "category": "Tablet",
-          "image": "https://ibox.co.id/media/catalog/product/cache/3/image/9df78eab33525d08d6e5fb8d27136e95/i/p/ipad-pro-11-select-cell-spacegray-201810.png",
-          "desc": "HP Terbaikk loh",
-          "id": 2
-        },
-        {
-          "productName": "iPhone 7 Plus",
-          "price": 5000000,
-          "category": "Phone",
-          "image": "https://ibox.co.id/media/wysiwyg/PromoOnline/web-banner---iphone-7-plus-rev.png",
-          "desc": "HP Terbaikk loh",
-          "id": 1
-        }
-      ],
+      "totalPrice": 410050000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "2020-05-05T09:30:45.851Z",
       "id": 1
     },
     {
-      "userId": 1,
-      "totalPrice": 640000000,
-      "status": "pending",
+      "userId": 4,
+      "totalPrice": 200000000,
+      "username": "faezar",
+      "status": "accept",
+      "checkOutDate": "2020-05-05T09:31:00.987Z",
       "id": 2
     },
     {
       "userId": 1,
-      "totalPrice": 40000000,
-      "status": "pending",
+      "totalPrice": 25000000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "2020-05-05T09:45:59.634Z",
       "id": 3
+    },
+    {
+      "userId": 1,
+      "totalPrice": 200000000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "2020-05-05T09:46:48.044Z",
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "totalPrice": 20000000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "2020-05-05T09:49:44.881Z",
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "totalPrice": 5000000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "2020-05-05T09:50:38.168Z",
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "totalPrice": 15000000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "2020-05-05T09:51:59.718Z",
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "totalPrice": 15000000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "2020-05-05T09:53:55.304Z",
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "totalPrice": 20000000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "2020-05-05T09:54:53.626Z",
+      "id": 9
     }
   ],
   "transactionDetails": [
     {
-      "productId": 4,
-      "price": "200000000",
-      "totalPrice": 600000000,
-      "quantity": 3,
+      "transactionId": 1,
+      "productId": 6,
+      "price": "10000000",
+      "totalPrice": 10000000,
+      "quantity": 1,
       "id": 1
     },
     {
-      "productId": 1,
-      "price": 5000000,
-      "totalPrice": 10000000,
-      "quantity": 2,
+      "transactionId": 1,
+      "productId": 5,
+      "price": "200000000",
+      "totalPrice": 200000000,
+      "quantity": 1,
       "id": 2
     },
     {
-      "productId": 2,
-      "price": 15000000,
-      "totalPrice": 30000000,
-      "quantity": 2,
+      "transactionId": 1,
+      "productId": 4,
+      "price": "200000000",
+      "totalPrice": 200000000,
+      "quantity": 1,
       "id": 3
     },
     {
+      "transactionId": 2,
+      "productId": 5,
+      "price": "200000000",
+      "totalPrice": 200000000,
+      "quantity": 1,
+      "id": 4
+    },
+    {
+      "transactionId": 3,
+      "productId": 1,
+      "price": 5000000,
+      "totalPrice": 5000000,
+      "quantity": 1,
+      "id": 5
+    },
+    {
+      "transactionId": 3,
       "productId": 3,
       "price": 20000000,
-      "totalPrice": 40000000,
-      "quantity": 2,
-      "transactionId": 3,
-      "id": 4
+      "totalPrice": 20000000,
+      "quantity": 1,
+      "id": 6
+    },
+    {
+      "transactionId": 4,
+      "productId": 4,
+      "price": "200000000",
+      "totalPrice": 200000000,
+      "quantity": 1,
+      "id": 7
+    },
+    {
+      "transactionId": 5,
+      "productId": 3,
+      "price": 20000000,
+      "totalPrice": 20000000,
+      "quantity": 1,
+      "id": 8
+    },
+    {
+      "transactionId": 6,
+      "productId": 1,
+      "price": 5000000,
+      "totalPrice": 5000000,
+      "quantity": 1,
+      "id": 9
+    },
+    {
+      "transactionId": 7,
+      "productId": 2,
+      "price": 15000000,
+      "totalPrice": 15000000,
+      "quantity": 1,
+      "id": 10
+    },
+    {
+      "transactionId": 8,
+      "productId": 2,
+      "price": 15000000,
+      "totalPrice": 15000000,
+      "quantity": 1,
+      "id": 11
+    },
+    {
+      "transactionId": 9,
+      "productId": 3,
+      "price": 20000000,
+      "totalPrice": 20000000,
+      "quantity": 1,
+      "id": 12
+    }
+  ],
+  "wishlists": [
+    {
+      "userId": 1,
+      "productId": 2,
+      "quantity": 1,
+      "id": 1
     }
   ]
 }

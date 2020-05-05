@@ -59,8 +59,8 @@ class Navbar extends React.Component {
       }
     })
       .then(res => {
-        console.log(res.data.length)
         this.setState({ keranjang: res.data.length })
+        // this.keranjangHandler()
       })
       .catch(err => {
         console.log(err)
@@ -110,20 +110,49 @@ class Navbar extends React.Component {
                             Dashboard
                     </Link>
                         </DropdownItem>
-                        <DropdownItem>Members</DropdownItem>
-                        <DropdownItem>Payments</DropdownItem>
-                      </DropdownMenu>
-                    ) : <DropdownMenu className="mt-2">
+                        <DropdownItem><Link
+                          style={{ color: "inherit", textDecoration: "none" }}
+                          to="/admin/member"
+                        >
+                          Members
+                    </Link>
+                        </DropdownItem>
                         <DropdownItem>
                           <Link
                             style={{ color: "inherit", textDecoration: "none" }}
-                            to="/admin/dashboard"
+                            to="/admin/payment"
+                          >
+                            Payments
+                          </Link>
+                        </DropdownItem>
+                        <DropdownItem>
+                          <Link
+                            style={{ color: "inherit", textDecoration: "none" }}
+                            to="/admin/pageReport"
+                          >
+                            Page Report
+                          </Link>
+                        </DropdownItem>
+                      </DropdownMenu>
+                    ) : <DropdownMenu className="mt-2">
+
+                        <DropdownItem>
+                          <Link
+                            style={{ color: "inherit", textDecoration: "none" }}
+                            to="/user/wishlist"
                           >
                             Wishlist
                     </Link>
                         </DropdownItem>
-                        <DropdownItem>History</DropdownItem>
-                        <DropdownItem>Payments</DropdownItem>
+                        <DropdownItem>
+                        <Link
+                            style={{ color: "inherit", textDecoration: "none" }}
+                            to="/user/history"
+                          >
+                            History
+                    </Link>
+                        </DropdownItem>
+
                       </DropdownMenu>
                   }
                 </Dropdown>
