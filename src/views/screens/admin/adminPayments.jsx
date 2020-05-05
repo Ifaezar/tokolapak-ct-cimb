@@ -11,19 +11,37 @@ import swal from "sweetalert";
 
 class AdminPayment extends React.Component {
     state = {
-        listDataTransaction: [],
+        listDataTransactionPending: [],
+        listDataTransactionAccept: [],
         isPending: true,
         username: ''
     }
     componentDidMount() {
-        this.getData()
-        this.showAcceptCart()
+        this.getDataPending()
+        this.getDataAccept()
         this.showPendingCart()
     }
-    getData = () => {
-        Axios.get(`${API_URL}/transaction`)
+    getDataPending = () => {
+        Axios.get(`${API_URL}/transaction`, {
+            params: {
+                status: "pending"
+            }
+        })
             .then(res => {
-                this.setState({ listDataTransaction: res.data })
+                this.setState({ listDataTransactionPending: res.data })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+    getDataAccept = () => {
+        Axios.get(`${API_URL}/transaction`, {
+            params: {
+                status: "accept"
+            }
+        })
+            .then(res => {
+                this.setState({ listDataTransactionAccept: res.data })
             })
             .catch(err => {
                 console.log(err)
@@ -39,94 +57,106 @@ class AdminPayment extends React.Component {
     }
 
     confirmPayment = (id) => {
+        var today = new Date()
+        var date = today.getDate() + '-' + (today.getMonth()) + '-' + today.getFullYear()
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
+        var dateTime = date + ' ' + time
         Axios.patch(`${API_URL}/transaction/${id}`, {
-            status: "accept"
+            status: "accept",
+            dateAccepted: dateTime
         })
             .then(res => {
                 swal("Success", "Payment Accepted", "success")
                 this.showPendingCart()
-                this.showAcceptCart()
+                this.getDataPending()
+                this.getDataAccept()
             })
     }
 
     showPendingCart = () => {
-        return (
-            <div>
-                <Table>
-                    <thead style={{ backgroundColor: "grey" }}>
-                        <tr>
-                            <td>No</td>
-                            <td>Username</td>
-                            <td>Price</td>
-                            <td>Status</td>
-                            <td>Action</td>
-                        </tr>
-                    </thead>
-                    {this.state.listDataTransaction.map((val, idx) => {
-                        if (val.status == "pending") {
-                            return (
-                                <>
-                                    <tbody >
-                                        <tr>
-                                            <td>{idx + 1}</td>
-                                            <td>{val.username}</td>
-                                            <td>{new Intl.NumberFormat("id-ID", {
-                                                style: "currency",
-                                                currency: "IDR",
-                                            }).format(val.totalPrice)}</td>
-                                            <td>{val.status}</td>
-                                            <ButtonUI type="outlined"
-                                                className={`auth-screen-btn mt-4`}
-                                                onClick={() => { this.confirmPayment(val.id) }}
-                                            >Confirm Payment
-                                            </ButtonUI>
-                                        </tr>
-                                    </tbody>
-                                </>
-                            )
+        if (this.state.isPending == true) {
+            return (
+                <div>
+                    <Table>
+                        <thead style={{ backgroundColor: "grey" }}>
+                            <tr>
+                                <td>No</td>
+                                <td>Username</td>
+                                <td>Price</td>
+                                <td>Check Out Date</td>
+                                <td>Status</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        {this.state.listDataTransactionPending.map((val, idx) => {
+                            if (val.status == "pending") {
+                                return (
+                                    <>
+                                        <tbody >
+                                            <tr>
+                                                <td>{idx + 1}</td>
+                                                <td>{val.username}</td>
+                                                <td>{new Intl.NumberFormat("id-ID", {
+                                                    style: "currency",
+                                                    currency: "IDR",
+                                                }).format(val.totalPrice)}</td>
+                                                <td>{val.checkOutDate}</td>
+                                                <td>{val.status}</td>
+                                                <ButtonUI type="outlined"
+                                                    className={`auth-screen-btn mt-4`}
+                                                    onClick={() => { this.confirmPayment(val.id) }}
+                                                >Confirm Payment
+                                                </ButtonUI>
+                                            </tr>
+                                        </tbody>
+                                    </>
+                                )
+                            }
+                        })
                         }
-                    })
-                    }
-                </Table>
-            </div>
-        )
-    }
-
-    showAcceptCart = () => {
-        return (
-            <div>
-                <Table>
-                    <thead style={{ backgroundColor: "grey" }}>
-                        <tr>
-                            <td>No</td>
-                            <td>Username</td>
-                            <td>Price</td>
-                            <td>Status</td>
-                        </tr>
-                    </thead>
-                    {this.state.listDataTransaction.map((val, idx) => {
-                        if (val.status == "accept") {
-                            return (
-                                <>
-                                    <tbody >
-                                        <tr>
-                                            <td>{idx + 1}</td>
-                                            <td>{val.username}</td>
-                                            <td>{new Intl.NumberFormat("id-ID", {
-                                                style: "currency",
-                                                currency: "IDR",
-                                            }).format(val.totalPrice)}</td>
-                                            <td>{val.status}</td>
-                                        </tr>
-                                    </tbody>
-                                </>
-                            )
+                    </Table>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <Table>
+                        <thead style={{ backgroundColor: "grey" }}>
+                            <tr>
+                                <td>No</td>
+                                <td>Username</td>
+                                <td>Check Out Date</td>
+                                <td>Accepted Date</td>
+                                <td>Price</td>
+                                <td>Status</td>
+                            </tr>
+                        </thead>
+                        {this.state.listDataTransactionAccept.map((val, idx) => {
+                            if (val.status == "accept") {
+                                return (
+                                    <>
+                                        <tbody >
+                                            <tr>
+                                                <td>{idx + 1}</td>
+                                                <td>{val.username}</td>
+                                                <td>{val.checkOutDate}</td>
+                                                <td>{val.dateAccepted}</td>
+                                                <td>{new Intl.NumberFormat("id-ID", {
+                                                    style: "currency",
+                                                    currency: "IDR",
+                                                }).format(val.totalPrice)}</td>
+                                                <td>{val.status}</td>
+                                            </tr>
+                                        </tbody>
+                                    </>
+                                )
+                            }
+                        })
                         }
-                    })
-                    }
-                </Table>
-            </div>
-        )
+                    </Table>
+                </div>
+            )
+        }
     }
 
     render() {
@@ -145,12 +175,7 @@ class AdminPayment extends React.Component {
                     </ButtonUI>
                     </div>
                 </div>
-                {
-                    this.state.isPending ? (
-                        this.showPendingCart()
-                    ) :
-                        this.showAcceptCart()
-                }
+                {this.showPendingCart()}
             </div>
         )
     }

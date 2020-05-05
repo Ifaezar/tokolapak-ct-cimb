@@ -228,6 +228,10 @@ class Cart extends React.Component {
     }
 
     confirmHandler = () => {
+        var today = new Date()
+        var date = today.getDate() + '-' + (today.getMonth()) + '-' + today.getFullYear()
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
+        var dateTime = date + ' ' + time
         Axios.get(`${API_URL}/cart`, {
             params: {
                 userId: this.props.user.id,
@@ -252,7 +256,7 @@ class Cart extends React.Component {
                     totalPrice: this.state.totalPrice,
                     username: this.props.user.username,
                     status: "pending",
-                    checkOutDate: new Date()
+                    checkOutDate: dateTime
 
                     // items: this.state.listItems,
                 })

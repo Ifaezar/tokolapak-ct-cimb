@@ -156,6 +156,48 @@
       "status": "accept",
       "checkOutDate": "2020-05-05T09:54:53.626Z",
       "id": 9
+    },
+    {
+      "userId": 1,
+      "totalPrice": 20000000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "2020-05-05T10:30:22.033Z",
+      "id": 10
+    },
+    {
+      "userId": 1,
+      "totalPrice": 400000000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "2020-05-05T11:14:34.022Z",
+      "id": 11
+    },
+    {
+      "userId": 1,
+      "totalPrice": 20000000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "2020-05-05T11:20:07.713Z",
+      "id": 12
+    },
+    {
+      "userId": 1,
+      "totalPrice": 15000000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "5-4-2020 18:32:23",
+      "id": 13,
+      "dateAccepted": "5-4-2020 18:36:26"
+    },
+    {
+      "userId": 1,
+      "totalPrice": 10000000,
+      "username": "ilham",
+      "status": "accept",
+      "checkOutDate": "5-4-2020 18:51:38",
+      "id": 14,
+      "dateAccepted": "5-4-2020 18:51:46"
     }
   ],
   "transactionDetails": [
@@ -254,6 +296,46 @@
       "totalPrice": 20000000,
       "quantity": 1,
       "id": 12
+    },
+    {
+      "transactionId": 10,
+      "productId": 3,
+      "price": 20000000,
+      "totalPrice": 20000000,
+      "quantity": 1,
+      "id": 13
+    },
+    {
+      "transactionId": 11,
+      "productId": 4,
+      "price": "200000000",
+      "totalPrice": 400000000,
+      "quantity": 2,
+      "id": 14
+    },
+    {
+      "transactionId": 12,
+      "productId": 3,
+      "price": 20000000,
+      "totalPrice": 20000000,
+      "quantity": 1,
+      "id": 15
+    },
+    {
+      "transactionId": 13,
+      "productId": 2,
+      "price": 15000000,
+      "totalPrice": 15000000,
+      "quantity": 1,
+      "id": 16
+    },
+    {
+      "transactionId": 14,
+      "productId": 6,
+      "price": "10000000",
+      "totalPrice": 10000000,
+      "quantity": 1,
+      "id": 17
     }
   ],
   "wishlists": [

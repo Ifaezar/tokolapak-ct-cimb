@@ -44,7 +44,6 @@ class History extends React.Component {
         return (
             this.state.listProduct.map((val, idx) => {
                 return (
-
                     <tr>
                         <td>{idx + 1}</td>
                         <td>{val.id}</td>

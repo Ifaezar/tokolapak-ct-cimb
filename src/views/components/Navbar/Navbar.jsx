@@ -145,7 +145,7 @@ class Navbar extends React.Component {
                     </Link>
                         </DropdownItem>
                         <DropdownItem>
-                        <Link
+                          <Link
                             style={{ color: "inherit", textDecoration: "none" }}
                             to="/user/history"
                           >
