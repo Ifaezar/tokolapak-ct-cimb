@@ -106,6 +106,7 @@ class Navbar extends React.Component {
                           <Link
                             style={{ color: "inherit", textDecoration: "none" }}
                             to="/admin/dashboard"
+                            onClick={this.keranjangHandler}
                           >
                             Dashboard
                     </Link>
@@ -113,6 +114,7 @@ class Navbar extends React.Component {
                         <DropdownItem><Link
                           style={{ color: "inherit", textDecoration: "none" }}
                           to="/admin/member"
+                          onClick={this.keranjangHandler}
                         >
                           Members
                     </Link>
@@ -121,6 +123,7 @@ class Navbar extends React.Component {
                           <Link
                             style={{ color: "inherit", textDecoration: "none" }}
                             to="/admin/payment"
+                            onClick={this.keranjangHandler}
                           >
                             Payments
                           </Link>
@@ -129,6 +132,7 @@ class Navbar extends React.Component {
                           <Link
                             style={{ color: "inherit", textDecoration: "none" }}
                             to="/admin/pageReport"
+                            onClick={this.keranjangHandler}
                           >
                             Page Report
                           </Link>
@@ -140,6 +144,7 @@ class Navbar extends React.Component {
                           <Link
                             style={{ color: "inherit", textDecoration: "none" }}
                             to="/user/wishlist"
+                            onClick={this.keranjangHandler}
                           >
                             Wishlist
                     </Link>
@@ -148,6 +153,7 @@ class Navbar extends React.Component {
                           <Link
                             style={{ color: "inherit", textDecoration: "none" }}
                             to="/user/history"
+                            onClick={this.keranjangHandler}
                           >
                             History
                     </Link>
@@ -176,6 +182,7 @@ class Navbar extends React.Component {
                   type="contained"
                   onClick={this.logOut}>
                   <Link style={{ textDecoration: "none", color: "inherit" }}
+                    onClick={this.keranjangHandler}
                     to="/"></Link>
                   Log Out
                 </ButtonUI>
@@ -184,7 +191,8 @@ class Navbar extends React.Component {
             ) :
               <>
                 <ButtonUI className="mr-3" type="textual">
-                  <Link to="/auth">
+                  <Link to="/auth"
+                    onClick={this.keranjangHandler}>
                     Sign in
             </Link>
                 </ButtonUI>
@@ -192,6 +200,7 @@ class Navbar extends React.Component {
                   <Link
                     style={{ textDecoration: "none", color: "white" }}
                     to="/auth"
+                    onClick={this.keranjangHandler}
                   >
                     Sign up
             </Link></ButtonUI>

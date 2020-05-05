@@ -49,6 +49,9 @@ class AdminPayment extends React.Component {
         })
             .then(res => {
                 this.setState({ listDataTransactionAccept: res.data })
+                this.getDataPending()
+                this.getDataAccept()
+                this.showPendingCart()
             })
             .catch(err => {
                 console.log(err)
@@ -219,10 +222,10 @@ class AdminPayment extends React.Component {
                                                 }).format(val.totalPrice)}</td>
                                                 <td>{val.status}</td>
                                                 <td>
-                                                        <ButtonUI
-                                                    onClick={() => this.detailDataAccept(idx)}
+                                                    <ButtonUI
+                                                        onClick={() => this.detailDataAccept(idx)}
                                                     >Details</ButtonUI>
-                                                    </td>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </>
@@ -268,7 +271,7 @@ class AdminPayment extends React.Component {
                         {
                             this.state.isPending ? (
                                 this.showDataHistory()
-                            ): this.showDataHistoryAccept()
+                            ) : this.showDataHistoryAccept()
                         }
                     </tbody>
                 </Table>

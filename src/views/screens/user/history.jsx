@@ -72,6 +72,7 @@ class History extends React.Component {
                         <tr>
                             <td>No</td>
                             <td>Total Price</td>
+                            <td>Date Accepted</td>
                             <td>Status</td>
                             <td>Action</td>
                         </tr>
@@ -86,6 +87,7 @@ class History extends React.Component {
                                             style: "currency",
                                             currency: "IDR",
                                         }).format(val.totalPrice)}</td>
+                                        <td>{val.dateAccepted}</td>
                                         <td>{val.status}</td>
                                         <td>
                                             <ButtonUI
