@@ -31,18 +31,27 @@ class AdminPageReport extends React.Component {
             .then(res => {
                 console.log(res.data)
                 this.setState({ listData: res.data })
-                res.data.map(val =>{
-                    this.setState({listProduct:[...this.state.listProduct,val.transactionDetails]})
+                Axios.get(`${API_URL}/transactionDetails`, {
+                    params: {
+                        status: "accept"
+                    }
                 })
+                    .then(res => {
+                        console.log(res.data)
+                        this.setState({ listProduct: res.data })
+                    })
+                // res.data.map(val =>{
+                //     this.setState({listProduct:[...this.state.listProduct,val.transactionDetails]})
+                // })
             })
     }
 
-    showUserData = () =>{
-        return this.state.listData.map((val,idx)=>{
-            return(
+    showUserData = () => {
+        return this.state.listData.map((val, idx) => {
+            return (
                 <>
                     <tr>
-                        <td>{idx+1}</td>
+                        <td>{idx + 1}</td>
                         <td>{val.username}</td>
                         <td>{val.transactionDetails.length}</td>
                     </tr>
@@ -51,13 +60,13 @@ class AdminPageReport extends React.Component {
         })
     }
 
-    showProductData = () =>{
+    showProductData = () => {
         console.log(this.state.listProduct)
-        return this.state.listProduct.map((val,idx)=>{
-            return(
+        return this.state.listProduct.map((val, idx) => {
+            return (
                 <>
                     <tr>
-                        <td>{idx+1}</td>
+                        <td>{idx + 1}</td>
                         <td>{val.productId}</td>
                         <td>{val.quantity}</td>
                     </tr>
@@ -81,7 +90,7 @@ class AdminPageReport extends React.Component {
                         {this.showUserData()}
                     </tbody>
                 </Table>
-                <br/>
+                <br />
                 <h1>Data product</h1>
                 <Table>
                     <thead>

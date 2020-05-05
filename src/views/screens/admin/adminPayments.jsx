@@ -44,6 +44,8 @@ class AdminPayment extends React.Component {
         })
             .then(res => {
                 swal("Success", "Payment Accepted", "success")
+                this.showPendingCart()
+                this.showAcceptCart()
             })
     }
 
