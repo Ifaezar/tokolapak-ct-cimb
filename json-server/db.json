@@ -83,7 +83,32 @@
       "id": 6
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "userId": 1,
+      "productId": 2,
+      "quantity": 1,
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "productId": 3,
+      "quantity": 1,
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "productId": 4,
+      "quantity": 1,
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "productId": 6,
+      "quantity": 1,
+      "id": 4
+    }
+  ],
   "transaction": [
     {
       "userId": 1,
@@ -198,6 +223,14 @@
       "checkOutDate": "5-4-2020 18:51:38",
       "id": 14,
       "dateAccepted": "5-4-2020 18:51:46"
+    },
+    {
+      "userId": 1,
+      "totalPrice": 10000000,
+      "username": "ilham",
+      "status": "pending",
+      "checkOutDate": "5-4-2020 19:38:40",
+      "id": 15
     }
   ],
   "transactionDetails": [
@@ -336,6 +369,14 @@
       "totalPrice": 10000000,
       "quantity": 1,
       "id": 17
+    },
+    {
+      "transactionId": 15,
+      "productId": 6,
+      "price": "10000000",
+      "totalPrice": 10000000,
+      "quantity": 1,
+      "id": 18
     }
   ],
   "wishlists": [

@@ -13,7 +13,12 @@ class AdminPayment extends React.Component {
     state = {
         listDataTransactionPending: [],
         listDataTransactionAccept: [],
+        transactionDetailsPending: [],
+        transactionDetailsAccept: [],
+        listProduct: [],
+        listData: [],
         isPending: true,
+        isActive: false,
         username: ''
     }
     componentDidMount() {
@@ -24,7 +29,8 @@ class AdminPayment extends React.Component {
     getDataPending = () => {
         Axios.get(`${API_URL}/transaction`, {
             params: {
-                status: "pending"
+                status: "pending",
+                _embed: "transactionDetails"
             }
         })
             .then(res => {
@@ -37,7 +43,8 @@ class AdminPayment extends React.Component {
     getDataAccept = () => {
         Axios.get(`${API_URL}/transaction`, {
             params: {
-                status: "accept"
+                status: "accept",
+                _embed: "transactionDetails"
             }
         })
             .then(res => {
@@ -56,6 +63,18 @@ class AdminPayment extends React.Component {
         this.setState({ isPending: false })
     }
 
+    detailDataPending = (id) => {
+        const { transactionDetails } = this.state.listDataTransactionPending[id]
+        this.setState({ transactionDetailsPending: transactionDetails })
+        this.setState({ isActive: true })
+    }
+
+    detailDataAccept = (id) => {
+        const { transactionDetails } = this.state.listDataTransactionAccept[id]
+        this.setState({ transactionDetailsAccept: transactionDetails })
+        this.setState({ isActive: true })
+    }
+
     confirmPayment = (id) => {
         var today = new Date()
         var date = today.getDate() + '-' + (today.getMonth()) + '-' + today.getFullYear()
@@ -68,9 +87,59 @@ class AdminPayment extends React.Component {
             .then(res => {
                 swal("Success", "Payment Accepted", "success")
                 this.showPendingCart()
-                this.getDataPending()
-                this.getDataAccept()
             })
+    }
+
+    showDataHistory = () => {
+        if (this.state.isActive) {
+            return (
+                this.state.transactionDetailsPending.map((val, idx) => {
+                    return (
+                        <tr>
+                            <td>{idx + 1}</td>
+                            <td>{val.id}</td>
+                            <td>
+                                {new Intl.NumberFormat("id-ID", {
+                                    style: "currency",
+                                    currency: "IDR",
+                                }).format(val.price)}</td>
+                            <td>{val.quantity}</td>
+                            <td>
+                                {new Intl.NumberFormat("id-ID", {
+                                    style: "currency",
+                                    currency: "IDR",
+                                }).format(val.totalPrice)}</td>
+                        </tr>
+                    )
+                })
+            )
+        }
+    }
+
+    showDataHistoryAccept = () => {
+        if (this.state.isActive) {
+            return (
+                this.state.transactionDetailsAccept.map((val, idx) => {
+                    return (
+                        <tr>
+                            <td>{idx + 1}</td>
+                            <td>{val.id}</td>
+                            <td>
+                                {new Intl.NumberFormat("id-ID", {
+                                    style: "currency",
+                                    currency: "IDR",
+                                }).format(val.price)}</td>
+                            <td>{val.quantity}</td>
+                            <td>
+                                {new Intl.NumberFormat("id-ID", {
+                                    style: "currency",
+                                    currency: "IDR",
+                                }).format(val.totalPrice)}</td>
+                        </tr>
+                    )
+                })
+            )
+        }
     }
 
     showPendingCart = () => {
@@ -107,6 +176,9 @@ class AdminPayment extends React.Component {
                                                     onClick={() => { this.confirmPayment(val.id) }}
                                                 >Confirm Payment
                                                 </ButtonUI>
+                                                <ButtonUI
+                                                    onClick={() => this.detailDataPending(idx)}
+                                                >Details</ButtonUI>
                                             </tr>
                                         </tbody>
                                     </>
@@ -146,6 +218,11 @@ class AdminPayment extends React.Component {
                                                     currency: "IDR",
                                                 }).format(val.totalPrice)}</td>
                                                 <td>{val.status}</td>
+                                                <td>
+                                                        <ButtonUI
+                                                    onClick={() => this.detailDataAccept(idx)}
+                                                    >Details</ButtonUI>
+                                                    </td>
                                             </tr>
                                         </tbody>
                                     </>
@@ -176,6 +253,25 @@ class AdminPayment extends React.Component {
                     </div>
                 </div>
                 {this.showPendingCart()}
+                <h1>Item Detail</h1>
+                <Table>
+                    <thead>
+                        <tr>
+                            <td>No</td>
+                            <td>Product Id</td>
+                            <td>Price Product</td>
+                            <td>Quantity</td>
+                            <td>Total Price</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.state.isPending ? (
+                                this.showDataHistory()
+                            ): this.showDataHistoryAccept()
+                        }
+                    </tbody>
+                </Table>
             </div>
         )
     }

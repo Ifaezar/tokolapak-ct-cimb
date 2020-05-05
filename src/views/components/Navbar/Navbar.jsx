@@ -160,6 +160,7 @@ class Navbar extends React.Component {
                   className="d-flex flex-row"
                   to="/cart"
                   style={{ textDecoration: "none", color: "inherit" }}
+                  onClick={this.keranjangHandler}
                 >
                   <FontAwesomeIcon
                     className="mr-2"

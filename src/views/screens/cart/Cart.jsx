@@ -74,7 +74,7 @@ class Cart extends React.Component {
     }
 
     tableProduct = () => {
-        if(this.state.listData.length > 0){
+        if (this.state.listData.length > 0) {
 
             return this.state.listData.map((val, idx) => {
                 return (
@@ -312,6 +312,7 @@ class Cart extends React.Component {
                                 <select
                                     value={this.state.jasaPengiriman}
                                     className="custom-text-input h-100 pl-3"
+                                    style={{ width: "25%" }}
                                     onChange={(e) => this.inputHandler(e)}
                                 >
                                     <option value="instant">Instant = Rp 100.000,00</option>

@@ -15,8 +15,7 @@ class AdminPageReport extends React.Component {
         productCount: 0,
         listData: [],
         listUsername: [],
-        listProduct: [],
-        listDataProduct: []
+        listProduct: []
     }
 
     componentDidMount() {
@@ -31,6 +30,7 @@ class AdminPageReport extends React.Component {
             }
         })
             .then(res => {
+                console.log(res.data)
                 this.setState({ listData: res.data })
                 Axios.get(`${API_URL}/users`)
                     .then(res => {
@@ -39,18 +39,8 @@ class AdminPageReport extends React.Component {
                     .catch(err => {
                         console.log(err)
                     })
-                Axios.get(`${API_URL}/transactionDetails`, {
-                    params: {
-                        status: "accept"
-                    }
-                })
-                    .then(res => {
-                        this.setState({ listDataProduct: res.data })
-                        console.log(res.data)
-                    })
                 Axios.get(`${API_URL}/products`)
                     .then(res => {
-                        console.log(res.data)
                         this.setState({ listProduct: res.data })
                     })
                     .catch(err => {
@@ -62,36 +52,39 @@ class AdminPageReport extends React.Component {
     showUserData = () => {
         return this.state.listUsername.map((value, idx) => {
             let totalBelanja = 0
-            this.state.listData.map((val) => {
-                if (val.username == value.username) {
-                    totalBelanja += val.totalPrice
-                } else {
-                    totalBelanja = totalBelanja
-                }
-            })
-            return (
-                <>
-                    <tr>
-                        <td>{idx + 1}</td>
-                        <td>{value.username}</td>
-                        <td>{totalBelanja}</td>
-                    </tr>
-                </>
-            )
+            if(value.role == "user"){
+                this.state.listData.map((val) => {
+                    if (val.username == value.username) {
+                        totalBelanja += val.totalPrice
+                    } else {
+                        totalBelanja = totalBelanja
+                    }
+                })
+                return (
+                    <>
+                        <tr>
+                            <td>{idx + 1}</td>
+                            <td>{value.username}</td>
+                            <td>{totalBelanja}</td>
+                        </tr>
+                    </>
+                )
+            }
         })
     }
 
     showProductData = () => {
         return this.state.listProduct.map((val, idx) => {
             let totalQuantityProduct = 0
-            this.state.listDataProduct.map(value => {
-                if (val.id == value.productId) {
-                    totalQuantityProduct += value.quantity
-                } else {
-                    totalQuantityProduct = totalQuantityProduct
-                }
+            this.state.listData.map(valueListData => {
+                valueListData.transactionDetails.map(valueTransactionDetail =>{
+                    if (val.id == valueTransactionDetail.productId) {
+                        totalQuantityProduct += valueTransactionDetail.quantity
+                    } else {
+                        totalQuantityProduct = totalQuantityProduct
+                    }
+                })
             })
-            console.log(val.id, totalQuantityProduct)
             return (
                 <>
                     <tr>
